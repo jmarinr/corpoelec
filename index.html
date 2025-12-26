@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corpo Elec - Catálogo Digital 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-red: #E31E24;
+            --secondary-red: #C41E3A;
+            --dark-red: #8B1538;
+            --light-gray: #F5F5F5;
+            --dark-gray: #333;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background: var(--light-gray);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(227, 30, 36, 0.95) 0%, rgba(139, 21, 56, 0.95) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23E31E24" width="1200" height="400"/><path fill="%23C41E3A" opacity="0.3" d="M0 200 Q300 100 600 200 T1200 200 V400 H0 Z"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Search Bar */
+        .search-section {
+            max-width: 1400px;
+            margin: -30px auto 2rem;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 100;
+        }
+
+        .search-bar {
+            background: white;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            padding: 0.5rem;
+        }
+
+        .search-bar button {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .search-bar button:hover {
+            background: var(--dark-red);
+            transform: scale(1.05);
+        }
+
+        /* Filters */
+        .filters {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary-red);
+            color: var(--primary-red);
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-red);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(227, 30, 36, 0.3);
+        }
+
+        /* Products Grid */
+        .products-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-red);
+        }
+
+        .category-header h3 {
+            font-size: 2rem;
+            color: var(--dark-red);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(227, 30, 36, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-red);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-code {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-specs {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-red);
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: #888;
+            display: block;
+        }
+
+        .btn-quote {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-quote:hover {
+            background: var(--dark-red);
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 10;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-gray);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer h4 {
+            color: var(--primary-red);
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .contact-info {
+                display: none;
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-red);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-circle">CE</div>
+                <div>
+                    <h1>Corpo Elec</h1>
+                    <div class="logo-subtitle">SOLUCIONES INTEGRALES</div>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div>📞 (507) 6393-3407</div>
+                <div>📧 operaciones@corpoelecpa.com</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h2>CATÁLOGO 2026</h2>
+        <p>Todo lo que necesitas en Equipos de Protección Personal</p>
+    </section>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Buscar productos por nombre, código o categoría...">
+            <button onclick="searchProducts()">🔍 Buscar</button>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterCategory('all')">Todos</button>
+        <button class="filter-btn" onclick="filterCategory('manual')">Protección Manual</button>
+        <button class="filter-btn" onclick="filterCategory('visual')">Protección Visual</button>
+        <button class="filter-btn" onclick="filterCategory('respiratoria')">Protección Respiratoria</button>
+        <button class="filter-btn" onclick="filterCategory('cabeza')">Protección de Cabeza</button>
+        <button class="filter-btn" onclick="filterCategory('facial')">Protección Facial</button>
+        <button class="filter-btn" onclick="filterCategory('auditiva')">Protección Auditiva</button>
+        <button class="filter-btn" onclick="filterCategory('calzado')">Calzado</button>
+        <button class="filter-btn" onclick="filterCategory('corporal')">Protección Corporal</button>
+        <button class="filter-btn" onclick="filterCategory('alturas')">Protección en Alturas</button>
+    </div>
+
+    <!-- Products Container -->
+    <div class="products-container" id="productsContainer">
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Cargando productos...</p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h4>Corpo Elec</h4>
+                <p>Soluciones Integrales en Equipos de Protección Personal</p>
+                <p>Panamá</p>
+            </div>
+            <div>
+                <h4>Contacto</h4>
+                <a href="tel:+50763933407">📞 (507) 6393-3407</a>
+                <a href="tel:+50768571961">📞 (507) 6857-1961</a>
+                <a href="mailto:operaciones@corpoelecpa.com">📧 operaciones@corpoelecpa.com</a>
+            </div>
+            <div>
+                <h4>Categorías</h4>
+                <a href="#manual">Protección Manual</a>
+                <a href="#visual">Protección Visual</a>
+                <a href="#respiratoria">Protección Respiratoria</a>
+                <a href="#cabeza">Protección de Cabeza</a>
+            </div>
+            <div>
+                <h4>Información</h4>
+                <a href="#sobre">Sobre Nosotros</a>
+                <a href="#politicas">Políticas</a>
+                <a href="#terminos">Términos y Condiciones</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product Database
+        const products = {
+            manual: [
+                {
+                    id: 'cut-ni',
+                    name: 'Cut (NI)',
+                    code: 'SHARK-001',
+                    category: 'manual',
+                    line: 'Línea SHARK',
+                    description: 'Guante anticorte nivel 5 recubierto en espuma de nitrilo, refuerzo entre pulgar e índice',
+                    specs: 'FIBRA HPPE - Nivel de corte 5 - Calibre 13 - Recubrimiento en nitrilo',
+                    price: 'Consultar',
+                    badge: 'NIVEL 5'
+                },
+                {
+                    id: 'smooth',
+                    name: 'Smooth',
+                    code: 'SHARK-002',
+                    category: 'manual',
+                    line: 'Línea SHARK',
+                    description: 'Guante anticorte nivel 5 recubierto en espuma de nitrilo, refuerzo entre pulgar',
+                    specs: 'FIBRA HPPE - Nivel de corte 5 - Calibre 13',
+                    price: 'Consultar',
+                    badge: 'NIVEL 5'
+                },
+                {
+                    id: 'cut-pu',
+                    name: 'Cut (PU)',
+                    code: 'SHARK-003',
+                    category: 'manual',
+                    line: 'Línea SHARK',
+                    description: 'Guante anticorte nivel 5, recubrimiento en poliuretano',
+                    specs: 'FIBRA HPPE - Nivel de corte 5 - Calibre 13 - Recubrimiento PU',
+                    price: 'Consultar',
+                    badge: 'NIVEL 5'
+                },
+                {
+                    id: 'power-shark',
+                    name: 'Power Shark',
+                    code: 'SHARK-004',
+                    category: 'manual',
+                    line: 'Línea SHARK',
+                    description: 'Guante antiimpacto, textil anticorte nivel 5, recubierto en espuma de nitrilo acabado arenoso, refuerzo entre pulgar e índice y moldes en TPR',
+                    specs: 'Nivel 5 - TPR - Antiimpacto',
+                    price: 'Consultar',
+                    badge: 'ANTIIMPACTO'
+                },
+                {
+                    id: 'cut-7',
+                    name: 'Cut 7',
+                    code: 'SHARK-005',
+                    category: 'manual',
+                    line: 'Línea SHARK',
+                    description: 'Guante anticorte nivel 7 recubierto en poliuretano',
+                    specs: 'FIBRA HPPE POLIETILENO - Nivel de corte 7',
+                    price: 'Consultar',
+                    badge: 'NIVEL 7'
+                },
+                {
+                    id: 'shark-max',
+                    name: 'Shark MAX',
+                    code: 'SHARK-006',
+                    category: 'manual',
+                    line: 'Línea SHARK',
+                    description: 'Guante antiimpacto, textil anticorte nivel 5, recubierto en espuma de nitrilo, refuerzo entre pulgar e índice y moldes en TPR, puño ajustable',
+                    specs: 'Nivel 5 - TPR - Puño ajustable - Antiimpacto',
+                    price: 'Consultar',
+                    badge: 'MÁXIMA PROTECCIÓN'
+                },
+                {
+                    id: 'snow',
+                    name: 'Snow',
+                    code: 'COMF-001',
+                    category: 'manual',
+                    line: 'Línea COMFORT',
+                    description: 'Tejido a dos hilos calibre 7, fabricado con poliéster y algodón. Brinda protección contra riesgos laborales mínimos',
+                    specs: 'Calibre 7 - Poliéster y algodón',
+                    price: 'Consultar',
+                    badge: 'ECONÓMICO'
+                },
+                {
+                    id: 'black-rain',
+                    name: 'Black Rain',
+                    code: 'COMF-002',
+                    category: 'manual',
+                    line: 'Línea COMFORT',
+                    description: 'Guante tejido en hilaza con puntos PVC doble cara, ambidiestro, color natural',
+                    specs: 'PVC doble cara - Ambidiestro',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'pu-topsafe',
+                    name: 'PU TopSafe',
+                    code: 'COMF-003',
+                    category: 'manual',
+                    line: 'Línea COMFORT',
+                    description: 'Guante de alta calidad recubrimiento en Poliuretano calibre 18. De uso general ideales para proteger a las personas en procesos de producción leves',
+                    specs: 'Calibre 18 - Recubrimiento PU',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'pu',
+                    name: 'Pu',
+                    code: 'COMF-004',
+                    category: 'manual',
+                    line: 'Línea COMFORT',
+                    description: 'Guante en poliéster recubierto en poliuretano, calibre 13',
+                    specs: 'Calibre 13 - Poliéster - Recubrimiento PU',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'grip',
+                    name: 'Grip',
+                    code: 'COMF-005',
+                    category: 'manual',
+                    line: 'Línea COMFORT',
+                    description: 'Guante en poliester recubierto en nitrilo corrugado, calibre 13, color negro. Recubrimiento de nitrilo corrugado ideal para trabajos en contacto con aceites',
+                    specs: 'Calibre 13 - Nitrilo corrugado - Negro',
+                    price: 'Consultar',
+                    badge: 'ANTI-ACEITES'
+                },
+                {
+                    id: 'build',
+                    name: 'Build',
+                    code: 'COMF-006',
+                    category: 'manual',
+                    line: 'Línea COMFORT',
+                    description: 'Guante en hilaza recubierto en nitrilo amarillo, puño elástico cerrado. Resistencia a productos químicos y derivados del petróleo. Resistente a cortes, pinchazos y abrasión',
+                    specs: 'Nitrilo amarillo - Resistente a químicos',
+                    price: 'Consultar',
+                    badge: 'QUÍMICOS'
+                }
+            ],
+            visual: [
+                {
+                    id: 'capitan-black-dark',
+                    name: 'Capitan Black Dark',
+                    code: 'VIS-001',
+                    category: 'visual',
+                    description: 'Lente ajustable de policarbonato, marco negro, lente oscuro',
+                    specs: 'Policarbonato - UV - Marco negro',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'capitan-red-blue',
+                    name: 'Capitan Red Blue Dark',
+                    code: 'VIS-002',
+                    category: 'visual',
+                    description: 'Lente ajustable de policarbonato, marco azul y rojo, lente oscuro',
+                    specs: 'Policarbonato - UV - Marco azul/rojo',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'capitan-black-clear',
+                    name: 'Capitan Black Clear',
+                    code: 'VIS-003',
+                    category: 'visual',
+                    description: 'Lente ajustable de policarbonato, marco negro, lente claro',
+                    specs: 'Policarbonato - UV - Marco negro - Lente claro',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'uni-eco',
+                    name: 'UNI ECO',
+                    code: 'VIS-004',
+                    category: 'visual',
+                    description: 'Monolentes con protector lateral y ventilación directa',
+                    specs: 'Ventilación directa - Protector lateral',
+                    price: 'Consultar',
+                    badge: 'ECONÓMICO'
+                },
+                {
+                    id: 'home',
+                    name: 'HOME',
+                    code: 'VIS-005',
+                    category: 'visual',
+                    description: 'Monogafa de cuerpo en PVC tintado azul de alta flexibilidad',
+                    specs: 'PVC - Alta flexibilidad - Azul',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'spider',
+                    name: 'Spider',
+                    code: 'VIS-006',
+                    category: 'visual',
+                    description: 'Lente de seguridad claro, tipo Spider. Lente claro / Oscuro',
+                    specs: 'Tipo Spider - Claro/Oscuro',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'spy-af',
+                    name: 'Spy AF Claro',
+                    code: 'VIS-007',
+                    category: 'visual',
+                    description: 'Lente en policarbonato claro con filtro UV y antiempañante',
+                    specs: 'UV - Antiempañante - Policarbonato',
+                    price: 'Consultar',
+                    badge: 'ANTI-FOG'
+                },
+                {
+                    id: 'venom-clara',
+                    name: 'Venom Clara',
+                    code: 'VIS-008',
+                    category: 'visual',
+                    description: 'Lente de seguridad liviano y envolvente, con protección UV, AF. Con cordón',
+                    specs: 'UV - AF - Envolvente - Con cordón',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'high-vision',
+                    name: 'Lente High Vision',
+                    code: 'VIS-009',
+                    category: 'visual',
+                    description: 'Protección completa frente a impactos, polvo, productos químicos, partículas, salpicaduras y radiación UV',
+                    specs: 'Protección completa - UV - Químicos',
+                    price: 'Consultar',
+                    badge: 'ALTA VISIÓN'
+                }
+            ],
+            respiratoria: [
+                {
+                    id: 'facial-economica',
+                    name: 'Facial Económica',
+                    code: 'RESP-001',
+                    category: 'respiratoria',
+                    description: 'Respirador elastomérico media cara',
+                    specs: 'CE 2834 EN140:1998',
+                    price: 'Consultar',
+                    badge: 'ECONÓMICA'
+                },
+                {
+                    id: 'mascara-facial',
+                    name: 'Mascara Facial',
+                    code: 'RESP-002',
+                    category: 'respiratoria',
+                    description: 'Máscara Facial Full Face. Protege incluyendo la inhalación de partículas sólidas, líquidas, gases y vapores',
+                    specs: 'CE 2834, EN 136:1998 CL2',
+                    price: 'Consultar',
+                    badge: 'FULL FACE'
+                },
+                {
+                    id: 'media-mascara',
+                    name: 'Media máscara facial',
+                    code: 'RESP-003',
+                    category: 'respiratoria',
+                    description: 'Media máscara facial con protección completa',
+                    specs: 'Protección respiratoria completa',
+                    price: 'Consultar'
+                }
+            ],
+            cabeza: [
+                {
+                    id: 'eco-cup',
+                    name: 'ECO CUP',
+                    code: 'HEAD-001',
+                    category: 'cabeza',
+                    description: 'Casco económico Tipo 1 Clase C',
+                    specs: 'Tipo 1 Clase C',
+                    price: 'Consultar',
+                    badge: 'ECONÓMICO'
+                },
+                {
+                    id: 'covered',
+                    name: 'COVERED',
+                    code: 'HEAD-002',
+                    category: 'cabeza',
+                    description: 'Casco certificado',
+                    specs: 'CE EN 397-2012 - ANSI Z 89.1 - EN 397 - Tipo 1 Clase C',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'steel',
+                    name: 'STEEL',
+                    code: 'HEAD-003',
+                    category: 'cabeza',
+                    description: 'Casco de alta calidad, certificado EN397-2012 con canaleta y sin barbuquejo',
+                    specs: 'EN397-2012 - Con canaleta',
+                    price: 'Consultar',
+                    badge: 'ALTA CALIDAD'
+                },
+                {
+                    id: 'brave',
+                    name: 'BRAVE',
+                    code: 'HEAD-004',
+                    category: 'cabeza',
+                    description: 'Casco de rescate',
+                    specs: 'CE EN397 + A1: 2012 - Tipo 1 Clase E',
+                    price: 'Consultar',
+                    badge: 'RESCATE'
+                },
+                {
+                    id: 'brave-pro',
+                    name: 'BRAVE PRO',
+                    code: 'HEAD-005',
+                    category: 'cabeza',
+                    description: 'Casco de seguridad para trabajos en altura',
+                    specs: 'CE- EN 397 + A1: 2012 EN 50365 - ANSI Z89.1: 2014 - Type 1 clase E',
+                    price: 'Consultar',
+                    badge: 'ALTURAS'
+                },
+                {
+                    id: 'artic',
+                    name: 'ARTIC',
+                    code: 'HEAD-006',
+                    category: 'cabeza',
+                    description: 'Casco para trabajo en alturas',
+                    specs: 'CE ANSI Z89.1 - 2014: Casco Industrial Tipo II',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'artic-reflectivo',
+                    name: 'ARTIC REFLECTIVO',
+                    code: 'HEAD-007',
+                    category: 'cabeza',
+                    description: 'Casco para trabajo en alturas. En polietileno de alta densidad ABS',
+                    specs: 'Casco tipo 2 clase E - Ansi Z89.1 EN 397',
+                    price: 'Consultar',
+                    badge: 'REFLECTIVO'
+                },
+                {
+                    id: 'tafilete-artic',
+                    name: 'Tafilete ARTIC',
+                    code: 'HEAD-008',
+                    category: 'cabeza',
+                    description: 'Sistema de suspensión para casco',
+                    specs: 'Compatible con cascos ARTIC',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'bump-cup',
+                    name: 'Bump Cup',
+                    code: 'HEAD-009',
+                    category: 'cabeza',
+                    description: 'Casquete de protección cubierta drill. Color azul',
+                    specs: 'Drill - Color azul',
+                    price: 'Consultar'
+                }
+            ],
+            facial: [
+                {
+                    id: 'careta-soldar',
+                    name: 'Careta para soldar',
+                    code: 'FAC-001',
+                    category: 'facial',
+                    description: 'Careta para soldar facial pull up',
+                    specs: 'CE EN 175 - ANSI Z87.1 2010',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'mascara-soldar-dark',
+                    name: 'Mascara Soldar Dark',
+                    code: 'FAC-002',
+                    category: 'facial',
+                    description: 'Careta de soldadura con oscurecimiento ático',
+                    specs: 'CE EN 175 - ANSI Z87.1 2003',
+                    price: 'Consultar',
+                    badge: 'AUTO DARK'
+                },
+                {
+                    id: 'careta-malla',
+                    name: 'Careta en Malla',
+                    code: 'FAC-003',
+                    category: 'facial',
+                    description: 'Careta facial en malla de acero',
+                    specs: 'EN 1731.2006-F, CE',
+                    price: 'Consultar'
+                }
+            ],
+            auditiva: [
+                {
+                    id: 'bullet',
+                    name: 'Bullet',
+                    code: 'AUD-001',
+                    category: 'auditiva',
+                    description: 'Protector auditivo de inserción con poliuretano color naranja',
+                    specs: 'Poliuretano - Naranja',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'pino-3',
+                    name: 'Pino 3',
+                    code: 'AUD-002',
+                    category: 'auditiva',
+                    description: 'Protector auditivo de inserción 3 membranas en caja individual, con TPR color verde. Incluye caja para guardar los protectores',
+                    specs: '3 membranas - TPR - Con caja',
+                    price: 'Consultar',
+                    badge: '3 CAPAS'
+                },
+                {
+                    id: 'ronin',
+                    name: 'Ronin',
+                    code: 'AUD-003',
+                    category: 'auditiva',
+                    description: 'Fono con banda 27 dB',
+                    specs: '27 dB - Con banda',
+                    price: 'Consultar',
+                    badge: '27dB'
+                }
+            ],
+            calzado: [
+                {
+                    id: 'bota-seguridad',
+                    name: 'Bota de Seguridad Industrial',
+                    code: 'FOOT-001',
+                    category: 'calzado',
+                    description: 'Bota de seguridad industrial con puntera de composite y plantilla de acero',
+                    specs: 'Puntera composite ISO 20345 - Resistencia 1100N/EN 12568 - Inyección directa en Poliuretano - ASTM 2413-18 EH - Plantilla SteelSeries EVA Basic - Poliéster texturizado calibre 4mm',
+                    price: 'Consultar',
+                    badge: 'INDUSTRIAL'
+                }
+            ],
+            corporal: [
+                {
+                    id: 'chaleco-60g',
+                    name: 'Chaleco 60 G',
+                    code: 'CORP-001',
+                    category: 'corporal',
+                    description: 'Chaleco reflectivo en malla color verde neón de 60 gramos',
+                    specs: 'Malla - 60g - Verde neón',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'chaleco-60o',
+                    name: 'Chaleco 60 O',
+                    code: 'CORP-002',
+                    category: 'corporal',
+                    description: 'Chaleco reflectivo en malla color naranja de 60 gramos',
+                    specs: 'Malla - 60g - Naranja',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'chaleco-150g',
+                    name: 'Chaleco 150 G',
+                    code: 'CORP-003',
+                    category: 'corporal',
+                    description: 'Chaleco reflectivo en malla color neón de 150 gramos',
+                    specs: 'Malla - 150g - Verde neón',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'chaleco-150o',
+                    name: 'Chaleco 150 O',
+                    code: 'CORP-004',
+                    category: 'corporal',
+                    description: 'Chaleco reflectivo en malla color naranja neón de 150 gramos',
+                    specs: 'Malla - 150g - Naranja neón',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'traje-bot3000',
+                    name: 'Traje BOT3000',
+                    code: 'CORP-005',
+                    category: 'corporal',
+                    description: 'Traje desechable de protección',
+                    specs: 'Desechable - Protección completa',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'traje-bot3001',
+                    name: 'Traje BOT3001',
+                    code: 'CORP-006',
+                    category: 'corporal',
+                    description: 'Traje desechable de protección',
+                    specs: 'Desechable - Protección completa',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'delantal-tpu',
+                    name: 'Delantal En TPU',
+                    code: 'CORP-007',
+                    category: 'corporal',
+                    description: 'Delantal en material TPU resistente',
+                    specs: 'TPU - Resistente a químicos',
+                    price: 'Consultar'
+                }
+            ],
+            alturas: [
+                {
+                    id: 'arnes-top-red',
+                    name: 'Arnés Top Red',
+                    code: 'ALT-001',
+                    category: 'alturas',
+                    description: 'Arnés de seguridad anticaídas, pélvico-pectoral con 4 argollas',
+                    specs: 'ANSI Z 359.11 de 2021 - 4 argollas',
+                    price: 'Consultar',
+                    badge: '4 ARGOLLAS'
+                },
+                {
+                    id: 'slinga-posicionamiento',
+                    name: 'Slinga posicionamiento',
+                    code: 'ALT-002',
+                    category: 'alturas',
+                    description: 'Línea de vida que sirve para asegurar el arnés a un punto de anclaje fijo / cinta en nylon regulable gancho de 3/4 de apertura',
+                    specs: 'ANSI Z359.3-2019 - Nylon regulable',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'punto-anclaje-movil',
+                    name: 'Punto Anclaje Móvil',
+                    code: 'ALT-003',
+                    category: 'alturas',
+                    description: 'Punto de anclaje móvil en nylon y 1 argolla 1 3/4 / con protector',
+                    specs: 'ANSI Z359.18-2017 - ANSI Z359.12 de 2019',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'slinga-y',
+                    name: 'Slinga en Y',
+                    code: 'ALT-004',
+                    category: 'alturas',
+                    description: 'Línea de vida en Y con amortiguador',
+                    specs: 'Doble ramal - Amortiguador',
+                    price: 'Consultar'
+                },
+                {
+                    id: 'slinga-restriccion',
+                    name: 'Eslinga de Restricción y Detención Regulable',
+                    code: 'ALT-005',
+                    category: 'alturas',
+                    description: 'Línea de vida de restricción de 1,8 m con amortiguador de impacto. Gancho de 3/4, gancho grande de 1/8 para conexión rápida. Ajustable',
+                    specs: 'ANSI Z359.12-19 - 1.8m - Ajustable',
+                    price: 'Consultar',
+                    badge: 'REGULABLE'
+                },
+                {
+                    id: 'mosqueton-d',
+                    name: 'Mosquetón en D',
+                    code: 'ALT-006',
+                    category: 'alturas',
+                    description: 'Mosquetón de seguridad tipo D',
+                    specs: 'ANSI Z359.12 de 2019',
+                    price: 'Consultar'
+                }
+            ]
+        };
+
+        // Render products
+        function renderProducts(filter = 'all', searchTerm = '') {
+            const container = document.getElementById('productsContainer');
+            let html = '';
+            
+            const categories = {
+                manual: 'PROTECCIÓN MANUAL',
+                visual: 'PROTECCIÓN VISUAL',
+                respiratoria: 'PROTECCIÓN RESPIRATORIA',
+                cabeza: 'PROTECCIÓN DE CABEZA',
+                facial: 'PROTECCIÓN FACIAL',
+                auditiva: 'PROTECCIÓN AUDITIVA',
+                calzado: 'CALZADO DE SEGURIDAD',
+                corporal: 'PROTECCIÓN CORPORAL',
+                alturas: 'PROTECCIÓN EN ALTURAS'
+            };
+
+            for (const [key, categoryName] of Object.entries(categories)) {
+                if (filter !== 'all' && filter !== key) continue;
+                
+                const categoryProducts = products[key].filter(p => {
+                    if (!searchTerm) return true;
+                    const term = searchTerm.toLowerCase();
+                    return p.name.toLowerCase().includes(term) ||
+                           p.code.toLowerCase().includes(term) ||
+                           p.description.toLowerCase().includes(term) ||
+                           (p.line && p.line.toLowerCase().includes(term));
+                });
+
+                if (categoryProducts.length === 0) continue;
+
+                html += `
+                    <div class="category-section" id="${key}">
+                        <div class="category-header">
+                            <h3>${categoryName}</h3>
+                            <span style="color: var(--primary-red); font-size: 1.2rem;">▪</span>
+                            <span style="color: #666;">${categoryProducts.length} productos</span>
+                        </div>
+                        <div class="products-grid">
+                `;
+
+                categoryProducts.forEach(product => {
+                    html += `
+                        <div class="product-card" onclick="showProductDetail('${product.id}', '${key}')">
+                            <div class="product-image">
+                                🛡️
+                                ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                            </div>
+                            <div class="product-info">
+                                <div class="product-name">${product.name}</div>
+                                <div class="product-code">Código: ${product.code}</div>
+                                ${product.line ? `<div class="product-specs" style="color: var(--primary-red); font-weight: 600;">${product.line}</div>` : ''}
+                                <div class="product-description">${product.description}</div>
+                                <div class="product-specs">${product.specs}</div>
+                                <div class="product-footer">
+                                    <div>
+                                        <span class="price-label">Precio</span>
+                                        <div class="product-price">${product.price}</div>
+                                    </div>
+                                    <button class="btn-quote" onclick="event.stopPropagation(); requestQuote('${product.name}', '${product.code}')">
+                                        Cotizar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (html === '') {
+                html = `
+                    <div style="text-align: center; padding: 4rem; color: #666;">
+                        <h3>No se encontraron productos</h3>
+                        <p>Intenta con otros términos de búsqueda o filtros</p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Filter by category
+        function filterCategory(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderProducts(category);
+        }
+
+        // Search products
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value;
+            renderProducts('all', searchTerm);
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+
+        // Show product detail
+        function showProductDetail(productId, category) {
+            const product = products[category].find(p => p.id === productId);
+            const modal = document.getElementById('productModal');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <div class="modal-grid">
+                    <div>
+                        <div class="product-image" style="height: 400px; margin-bottom: 1rem;">
+                            🛡️
+                            ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        </div>
+                    </div>
+                    <div>
+                        <h2 style="color: var(--dark-red); margin-bottom: 0.5rem;">${product.name}</h2>
+                        <p style="color: #666; margin-bottom: 1rem;">Código: ${product.code}</p>
+                        ${product.line ? `<p style="color: var(--primary-red); font-weight: 600; margin-bottom: 1rem;">${product.line}</p>` : ''}
+                        
+                        <h3 style="color: var(--dark-gray); margin-top: 2rem; margin-bottom: 1rem;">Descripción</h3>
+                        <p style="line-height: 1.8;">${product.description}</p>
+                        
+                        <h3 style="color: var(--dark-gray); margin-top: 2rem; margin-bottom: 1rem;">Especificaciones</h3>
+                        <p style="line-height: 1.8; color: #666;">${product.specs}</p>
+                        
+                        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #eee;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span style="color: #888; font-size: 0.9rem;">Precio</span>
+                                    <div style="font-size: 2rem; font-weight: 700; color: var(--primary-red);">${product.price}</div>
+                                </div>
+                                <button class="btn-quote" style="padding: 1rem 2rem; font-size: 1.1rem;" onclick="requestQuote('${product.name}', '${product.code}')">
+                                    Solicitar Cotización
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+        }
+
+        // Close modal on click outside
+        document.getElementById('productModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Request quote
+        function requestQuote(productName, productCode) {
+            const message = `Hola, me interesa cotizar el producto: ${productName} (${productCode})`;
+            const whatsappUrl = `https://wa.me/50763933407?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Initialize
+        setTimeout(() => {
+            renderProducts();
+        }, 500);
+    </script>
+</body>
+</html>
